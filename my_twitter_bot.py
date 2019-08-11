@@ -1,15 +1,17 @@
-from datetime import datetime, timedelta
-from threading import Timer
+from datetime import datetime
 from collections import defaultdict
 import tweepy
 import random
 
-#x = datetime.today()
-#y = x.replace(day = x.day, hour = 14, minute = 34, second = 0, microsecond = 0) + timedelta(days = 1)
-#delta_t = y - x
-#secs = delta_t.total_seconds()
-
 def KanyeBot():
+    CONSUMER_KEY = '7metadWxD4c1yIoCJrCTyYA77'
+    CONSUMER_SECRET = 'DvK2CNXIh5oJj2nbn6xH1JK64j3z031O5z4CpEVAM3KGqbeYNZ'
+    ACCESS_KEY = '1154847777383276544-0KL98MpXkLL3SlSozevDhXS8m7Knhz'
+    ACCESS_SECRET = 'U02lsTKH49LdesNRvXR0F7JC6WLJrjIIqnh7q0dNJVysz'
+
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+    api = tweepy.API(auth)
 
     senLen = 0
     finalSen = ''
@@ -31,7 +33,7 @@ def KanyeBot():
         finalSen+= word +' '
         senLen+= len(word)
 
-#t = Timer(secs, KanyeBot)
-#t.start()
+    api.update_status(finalSen)
 
-KanyeBot()
+with open(datetime.now().strftime("%d-%m-%Y"),"w") as file:
+    file.write(str(KanyeBot()))
